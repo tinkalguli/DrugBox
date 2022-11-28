@@ -5,6 +5,8 @@ ruby '3.0.1'
 
 gem 'jwt'
 
+gem 'sidekiq'
+
 # For compiling and bundling JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker'
 

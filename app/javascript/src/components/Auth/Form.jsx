@@ -23,7 +23,7 @@ const Form = ({ isSignup = false, handleSubmit }) => {
         <Typography className="pb-4" variant="h4" component="h4">
           {isSignup ? "Register" : "Sign in"}
         </Typography>
-        <form onSubmit={formik.handleSubmit} className="space-y-4">
+        <Box component="form"  onSubmit={formik.handleSubmit} className="space-y-4">
           {isSignup && <TextField
             fullWidth
             id="name"
@@ -78,7 +78,7 @@ const Form = ({ isSignup = false, handleSubmit }) => {
               }
             </Typography>
           </div>
-        </form>
+        </Box>
       </div>
     </div>
   );
