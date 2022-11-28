@@ -1,24 +1,27 @@
-# README
+# DrugBox 💊
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Local Development Setup
 
-Things you may want to cover:
+First clone this repo.
 
-* Ruby version
+Then install the [Node.js](https://nodejs.org) version `v16.5` which we have specified inside the `.node-version` file of this repo.
 
-* System dependencies
+```bash
+nvm install
+```
 
-* Configuration
+Make sure that [yarn](https://yarnpkg.com) is installed with it as well in your system.
 
-* Database creation
+After `yarn` is installed, install the Node.js and Rails dependencies and also seed the database, by running:
 
-* Database initialization
+```bash
+./bin/setup
+```
 
-* How to run the test suite
+Start the server by executing following command.
 
-* Services (job queues, cache servers, search engines, etc.)
+```bash
+bundle exec rails server -p 3000
+```
 
-* Deployment instructions
-
-* ...
+Visit http://localhost:3000.
