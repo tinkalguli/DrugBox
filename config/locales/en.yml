@@ -30,4 +30,14 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  auth:
+    unauthorized: "You are not unauthorized."
+    success_sign_up: "You have successfully signed up."
+    success_sign_in: "You have successfully logged in."
+    invalid_credentials: "You have entered invalid credentials."
+  session:
+    could_not_auth: "Could not authenticate with the provided credentials!"
+    incorrect_credentials: "Incorrect credentials, try again!"
+  successfully_created: "%{entity} was successfully created!"
+  successfully_updated: "%{entity} was successfully updated!"
+  successfully_deleted: "%{entity} was successfully deleted!"

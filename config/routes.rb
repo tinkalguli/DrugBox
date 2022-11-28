@@ -1,4 +1,14 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
-  root "home#index"
-  get "*path", to: "home#index", via: :all
+  scope :api, defaults: { format: :json } do
+    devise_for :users, controllers: { sessions: :sessions },
+                       path_names: { sign_in: :login }
+    resource :user, only: :show do
+      post :invite, on: :collection
+    end
+  end
+
+  root 'home#index'
+  get '*path', to: 'home#index', via: :all
 end
