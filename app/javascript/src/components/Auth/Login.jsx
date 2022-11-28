@@ -6,6 +6,7 @@ import Form from "./Form";
 import authApi from "apis/auth";
 import { setToLocalStorage } from "utils/storage";
 import { setAuthHeaders } from "apis/axios";
+import Toastr from "components/Common/Toastr";
 
 const Login = () => {
   const handleSubmit = async values => {
@@ -15,7 +16,7 @@ const Login = () => {
       setAuthHeaders(user.token);
       window.location.href = "/";
     } catch (error) {
-      logger.error(error);
+      Toastr.error(error);
     }
   };
 

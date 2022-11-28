@@ -8,6 +8,7 @@ import Dashboard from "components/Dashboard";
 import PrivateRoute from "components/Common/PrivateRoute";
 import usersApi from "apis/users";
 import { useUserDispatch, useUserState } from "contexts/user";
+import { ToastContainer } from "react-toastify";
 
 const Main = () => {
   const [loading, setLoading] = useState(true);
@@ -29,18 +30,33 @@ const Main = () => {
     fetchUserDetails();
   }, []);
 
+  const NoticeContainer = () => (
+    <ToastContainer
+      position="top-right"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+    />
+  );
+
   if (loading) {
     return <h1>Loading...</h1>;
   }
 
   return (
     <Router>
+      <NoticeContainer />
       <Switch>
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/login" component={Login} />
         <PrivateRoute
           component={Dashboard}
-          condition={user}
+          condition={Boolean(user)}
           path="/"
           redirectRoute="/login"
         />
