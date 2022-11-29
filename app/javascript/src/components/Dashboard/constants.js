@@ -9,6 +9,14 @@ export const VALIDATION_SCHEMA = yup.object({
     .required('Email is required'),
 });
 
-export const NAV_LINKS = ["Dashboard"];
+export const NAV_LINKS = [
+  {
+    title: "Dashboard",
+    path: "/",
+  }
+];
 
-export const PROFILE_LINKS = ["Profile", "Logout"];
+export const PROFILE_LINKS = {
+  profile: "Profile",
+  logout: "Logout",
+};

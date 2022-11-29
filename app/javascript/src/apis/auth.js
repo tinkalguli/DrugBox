@@ -5,7 +5,7 @@ const login = payload => axios.post(`${USERS_URL}/login`, payload);
 
 const signup = payload => axios.post(`${USERS_URL}`, payload);
 
-const logout = () => axios.post(`${USERS_URL}/sign_out`);
+const logout = () => axios.delete(`${USERS_URL}/logout`);
 
 const authApi = {
   signup,

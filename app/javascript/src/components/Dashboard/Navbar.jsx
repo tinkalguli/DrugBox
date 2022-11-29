@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from 'react-router-dom';
 import {
   AppBar,
   Box,
@@ -15,28 +16,44 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import AdbIcon from "@mui/icons-material/Adb";
 import { NAV_LINKS, PROFILE_LINKS } from "./constants";
+import Toastr from "components/Common/Toastr";
+import authApi from "apis/auth";
+import { resetAuthTokens } from "apis/axios";
+import { clearLocalStorageCredentials } from "utils/storage";
 
 const Navbar = () => {
-  const [anchorElNav, setAnchorElNav] = useState(
-    null
-  );
-  const [anchorElUser, setAnchorElUser] = useState(
-    null
-  );
+  const history = useHistory();
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
+  const handleOpenNavMenu = (event) => setAnchorElNav(event.currentTarget);
+  const handleOpenUserMenu = (event) => setAnchorElUser(event.currentTarget);
+  const handleCloseNavMenu = () => setAnchorElNav(null);
+  const handleCloseUserMenu = () => setAnchorElUser(null);
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
+  const handleLogout = async () => {
     setAnchorElUser(null);
+    try {
+      await authApi.logout();
+      resetAuthTokens();
+      clearLocalStorageCredentials();
+      window.location.href = "/login";
+    } catch (error) {
+      Toastr.error(error);
+    }
+  };
+
+  const handleUserMenuClick = async (linkTitle) => {
+    if (PROFILE_LINKS.logout === linkTitle) {
+      handleLogout();
+    } else {
+      setAnchorElUser(null);
+    }
+  };
+
+  const handleNavMenuClick = (path) => {
+    handleCloseNavMenu();
+    history.push(path);
   };
 
   return (
@@ -91,9 +108,9 @@ const Navbar = () => {
                 display: { xs: "block", md: "none" }
               }}
             >
-              {NAV_LINKS.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+              {NAV_LINKS.map(({ title, path }) => (
+                <MenuItem key={title} onClick={() => handleNavMenuClick(path)}>
+                  <Typography textAlign="center">{title}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -118,13 +135,13 @@ const Navbar = () => {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {NAV_LINKS.map((page) => (
+            {NAV_LINKS.map(({ title, path }) => (
               <Button
-                key={page}
-                onClick={handleCloseNavMenu}
+                key={title}
+                onClick={() => handleNavMenuClick(path)}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                {page}
+                {title}
               </Button>
             ))}
           </Box>
@@ -151,9 +168,9 @@ const Navbar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {PROFILE_LINKS.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+              {Object.values(PROFILE_LINKS).map((settings) => (
+                <MenuItem key={settings} onClick={() => handleUserMenuClick(settings)}>
+                  <Typography textAlign="center">{settings}</Typography>
                 </MenuItem>
               ))}
             </Menu>

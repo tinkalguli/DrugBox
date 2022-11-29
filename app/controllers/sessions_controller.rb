@@ -1,4 +1,6 @@
 class SessionsController < Devise::SessionsController
+  before_action :authenticate_user!, only: :destroy
+  
   def create
     user = User.find_by_email(login_params[:email])
 
@@ -7,6 +9,11 @@ class SessionsController < Devise::SessionsController
     else
       respond_with_error(t('auth.invalid_credentials'))
     end
+  end
+
+  def destroy
+    @current_user_id = ''
+    reset_session
   end
 
   private

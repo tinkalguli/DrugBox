@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React from 'react';
 import Box from '@mui/material/Box';
 import DoctorSvg from "images/doctor.svg"
 import Form from "./Form";
