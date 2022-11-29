@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useFormik } from 'formik';
-import { Button, Link, TextField, Typography } from '@mui/material';
+import { Button, Box, Link, TextField, Typography } from '@mui/material';
 
 import {
   SIGNUP_INITIAL_VALUES,
