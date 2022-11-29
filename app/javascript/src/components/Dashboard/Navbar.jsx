@@ -14,9 +14,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import AdbIcon from "@mui/icons-material/Adb";
-
-const pages = ["Dashboard"];
-const settings = ["Profile", "Logout"];
+import { NAV_LINKS, PROFILE_LINKS } from "./constants";
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = useState(
@@ -93,7 +91,7 @@ const Navbar = () => {
                 display: { xs: "block", md: "none" }
               }}
             >
-              {pages.map((page) => (
+              {NAV_LINKS.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
@@ -120,7 +118,7 @@ const Navbar = () => {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
+            {NAV_LINKS.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
@@ -153,7 +151,7 @@ const Navbar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
+              {PROFILE_LINKS.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>

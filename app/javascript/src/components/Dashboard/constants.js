@@ -8,3 +8,7 @@ export const VALIDATION_SCHEMA = yup.object({
     .email('Enter a valid email')
     .required('Email is required'),
 });
+
+export const NAV_LINKS = ["Dashboard"];
+
+export const PROFILE_LINKS = ["Profile", "Logout"];
